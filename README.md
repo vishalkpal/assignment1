@@ -11,5 +11,5 @@ Steps:
 
 
 Security measures
-I have kept the bucket and objects as private.
-only cloudfront haveaccess to bucket using oicd.
+1) I have kept the bucket and objects as private.
+2) only cloudfront haveaccess to bucket using oicd.
