@@ -1,0 +1,23 @@
+--- 
+- 
+  hosts: aws
+  name: "install jenkins"
+  become: yes 
+  tasks: 
+    - 
+      name: "update package and install jdk"
+      shell: sudo apt install default-jre
+      shell: sudo apt install default-jdk
+    -
+      name: "install jenkins"
+      shell: wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key |sudo gpg --dearmor -o /usr/share/keyrings/jenkins.gpg
+      shell: sudo sh -c 'echo deb [signed-by=/usr/share/keyrings/jenkins.gpg] http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+      shell: sudo apt update
+      shell: sudo apt install jenkins
+      shell: sudo systemctl status jenkins
+    - 
+      name: "getting password jenkins"
+      command: sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+      register: newvar
+    - 
+      debug: msg={{ newvar.stdout }}  
